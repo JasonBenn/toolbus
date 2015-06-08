@@ -8,6 +8,7 @@ gem 'rails-api'
 gem 'jsonapi-resources'
 gem 'mysql2'
 gem 'faker'
+gem 'jbuilder'
 
 group :test do
   gem 'factory_girl_rails'

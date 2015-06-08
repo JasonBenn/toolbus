@@ -1,4 +1,4 @@
 class Completion < ActiveRecord::Base
-  belongs_to :achievement
+  belongs_to :mission
   belongs_to :repo
 end

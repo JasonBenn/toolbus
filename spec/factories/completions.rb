@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :completion do
-    achievement nil
+    mission nil
 repo nil
 commit "MyString"
 filename "MyString"

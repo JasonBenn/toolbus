@@ -1,5 +1,10 @@
 class ToolsController < ApplicationController
   def index
-    render json: Tool.all
+    @tools = Tool.all
+  end
+
+  def show
+    @tool = Tool.find(params[:id])
+    @missions = @tool.missions
   end
 end

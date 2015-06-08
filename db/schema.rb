@@ -13,7 +13,22 @@
 
 ActiveRecord::Schema.define(version: 20150608060009) do
 
-  create_table "achievements", force: :cascade do |t|
+  create_table "completions", force: :cascade do |t|
+    t.integer  "mission_id", limit: 4
+    t.integer  "repo_id",    limit: 4
+    t.string   "commit",     limit: 255
+    t.string   "filename",   limit: 255
+    t.integer  "line_start", limit: 4
+    t.integer  "line_end",   limit: 4
+    t.string   "gist_url",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "completions", ["mission_id"], name: "index_completions_on_mission_id", using: :btree
+  add_index "completions", ["repo_id"], name: "index_completions_on_repo_id", using: :btree
+
+  create_table "missions", force: :cascade do |t|
     t.text     "name",              limit: 65535
     t.text     "summary",           limit: 65535
     t.text     "found_in",          limit: 65535
@@ -27,23 +42,8 @@ ActiveRecord::Schema.define(version: 20150608060009) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "achievements", ["tool_id"], name: "index_achievements_on_tool_id", using: :btree
-  add_index "achievements", ["user_id"], name: "index_achievements_on_user_id", using: :btree
-
-  create_table "completions", force: :cascade do |t|
-    t.integer  "achievement_id", limit: 4
-    t.integer  "repo_id",        limit: 4
-    t.string   "commit",         limit: 255
-    t.string   "filename",       limit: 255
-    t.integer  "line_start",     limit: 4
-    t.integer  "line_end",       limit: 4
-    t.string   "gist_url",       limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "completions", ["achievement_id"], name: "index_completions_on_achievement_id", using: :btree
-  add_index "completions", ["repo_id"], name: "index_completions_on_repo_id", using: :btree
+  add_index "missions", ["tool_id"], name: "index_missions_on_tool_id", using: :btree
+  add_index "missions", ["user_id"], name: "index_missions_on_user_id", using: :btree
 
   create_table "repos", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -86,9 +86,9 @@ ActiveRecord::Schema.define(version: 20150608060009) do
     t.datetime "updated_at",               null: false
   end
 
-  add_foreign_key "achievements", "tools"
-  add_foreign_key "achievements", "users"
-  add_foreign_key "completions", "achievements"
+  add_foreign_key "completions", "missions"
   add_foreign_key "completions", "repos"
+  add_foreign_key "missions", "tools"
+  add_foreign_key "missions", "users"
   add_foreign_key "repos", "users"
 end

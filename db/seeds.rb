@@ -35,7 +35,7 @@ end
 
 Tool.all.each do |tool|
   rand(35..150).times do
-    Achievement.create(
+    Mission.create(
       name: [Faker::Hacker.adjective, Faker::Hacker.noun, Faker::Hacker.verb, Faker::Hacker.ingverb].sample(rand(3) + 2).join(' ').capitalize,
       summary: Array.new(rand(3) + 1, Faker::Hacker.say_something_smart).join(' '),
       found_in: Array.new(rand(2) + 1, Faker::Hacker.abbreviation),
@@ -55,13 +55,13 @@ User.all.each do |user|
   end
 end
 
-achievement_count = Achievement.count
+mission_count = Mission.count
 tool_count = Tool.count
 user_count = User.count
 repo_count = Repo.count
 
-achievement_count.times do
-  achievement_id = rand(achievement_count) + 1
+mission_count.times do
+  mission_id = rand(mission_count) + 1
   line_start = rand(100)
   
   [0, 0, 0, 1, 3, 5, 2].sample.times do 
@@ -72,7 +72,7 @@ achievement_count.times do
       line_start: line_start,
       line_end: line_start + rand(5),
       repo_id: rand(repo_count) + 1,
-      achievement_id: achievement_id
+      mission_id: mission_id
     )
   end
 end
