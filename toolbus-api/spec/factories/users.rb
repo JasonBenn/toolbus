@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :user do
     username "MyString"
-image_url "MyString"
+    image_url "MyString"
   end
-
 end

@@ -11,13 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608042344) do
+ActiveRecord::Schema.define(version: 20150608051139) do
+
+  create_table "achievements", force: :cascade do |t|
+    t.text     "name",              limit: 65535
+    t.text     "summary",           limit: 65535
+    t.text     "found_in",          limit: 65535
+    t.text     "documentation_url", limit: 65535
+    t.string   "version_added",     limit: 255
+    t.string   "version_removed",   limit: 255
+    t.integer  "version",           limit: 4
+    t.integer  "user_id",           limit: 4
+    t.integer  "tool_id",           limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "achievements", ["tool_id"], name: "index_achievements_on_tool_id", using: :btree
+  add_index "achievements", ["user_id"], name: "index_achievements_on_user_id", using: :btree
+
+  create_table "tools", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "primary_color",   limit: 255
+    t.string   "secondary_color", limit: 255
+    t.text     "description",     limit: 65535
+    t.text     "url",             limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",   limit: 255
-    t.string   "image_url",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.text     "image_url",  limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
+  add_foreign_key "achievements", "tools"
+  add_foreign_key "achievements", "users"
 end
