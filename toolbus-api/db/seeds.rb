@@ -46,3 +46,48 @@ Tool.all.each do |tool|
     )
   end
 end
+
+User.all.each do |user|
+  rand(1..5).times do
+    Repo.create(
+      name: [Faker::Hacker.adjective, Faker::Hacker.noun, Faker::Hacker.verb, Faker::Hacker.ingverb].sample(rand(2) + rand(3)).join('_')
+    )
+  end
+end
+
+achievement_count = Achievement.count
+tool_count = Tool.count
+user_count = User.count
+repo_count = Repo.count
+
+achievement_count.times do
+  achievement_id = rand(achievement_count) + 1
+  line_start = rand(100)
+  
+  [0, 0, 0, 1, 3, 5, 2].sample.times do 
+    Completion.create(
+      commit: Faker::Internet.password,
+      filename: 'app/models/example.rb',
+      gist_url: Faker::Internet.url('github.com'),
+      line_start: line_start,
+      line_end: line_start + rand(5),
+      repo_id: rand(repo_count) + 1,
+      achievement_id: achievement_id
+    )
+  end
+end
+
+ToolsUsers.create(
+  tool_id: rand(tool_count) + 1,
+  user_id: rand(user_count) + 1
+)
+
+ReposTools.create(
+  tool_id: rand(tool_count) + 1,
+  repo_id: rand(repo_count) + 1
+)
+
+ReposUsers.create(
+  repo_id: rand(repo_count) + 1,
+  user_id: rand(user_count) + 1
+)

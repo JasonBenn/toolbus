@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608051139) do
+ActiveRecord::Schema.define(version: 20150608060009) do
 
   create_table "achievements", force: :cascade do |t|
     t.text     "name",              limit: 65535
@@ -30,6 +30,40 @@ ActiveRecord::Schema.define(version: 20150608051139) do
   add_index "achievements", ["tool_id"], name: "index_achievements_on_tool_id", using: :btree
   add_index "achievements", ["user_id"], name: "index_achievements_on_user_id", using: :btree
 
+  create_table "completions", force: :cascade do |t|
+    t.integer  "achievement_id", limit: 4
+    t.integer  "repo_id",        limit: 4
+    t.string   "commit",         limit: 255
+    t.string   "filename",       limit: 255
+    t.integer  "line_start",     limit: 4
+    t.integer  "line_end",       limit: 4
+    t.string   "gist_url",       limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "completions", ["achievement_id"], name: "index_completions_on_achievement_id", using: :btree
+  add_index "completions", ["repo_id"], name: "index_completions_on_repo_id", using: :btree
+
+  create_table "repos", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "repos", ["user_id"], name: "index_repos_on_user_id", using: :btree
+
+  create_table "repos_tools", force: :cascade do |t|
+    t.integer "repo_id", limit: 4
+    t.integer "tool_id", limit: 4
+  end
+
+  create_table "repos_users", force: :cascade do |t|
+    t.integer "repo_id", limit: 4
+    t.integer "user_id", limit: 4
+  end
+
   create_table "tools", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "primary_color",   limit: 255
@@ -38,6 +72,11 @@ ActiveRecord::Schema.define(version: 20150608051139) do
     t.text     "url",             limit: 65535
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+  end
+
+  create_table "tools_users", force: :cascade do |t|
+    t.integer "tool_id", limit: 4
+    t.integer "user_id", limit: 4
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,4 +88,7 @@ ActiveRecord::Schema.define(version: 20150608051139) do
 
   add_foreign_key "achievements", "tools"
   add_foreign_key "achievements", "users"
+  add_foreign_key "completions", "achievements"
+  add_foreign_key "completions", "repos"
+  add_foreign_key "repos", "users"
 end
