@@ -33,7 +33,7 @@ secondary_colors = {
   )
 end
 
-Tool.all.each do |tool|
+Tool.pluck(:id).each do |tool_id|
   rand(35..150).times do
     Mission.create(
       name: [Faker::Hacker.adjective, Faker::Hacker.noun, Faker::Hacker.verb, Faker::Hacker.ingverb].sample(rand(3) + 2).join(' ').capitalize,
@@ -42,14 +42,15 @@ Tool.all.each do |tool|
       documentation_url: Faker::Internet.url,
       version_added: rand(3),
       version_removed: rand(10) + 3,
-      tool_id: tool.id
+      tool_id: tool_id
     )
   end
 end
 
-User.all.each do |user|
+User.pluck(:id).each do |user_id|
   rand(1..5).times do
     Repo.create(
+      user_id: user_id,
       name: [Faker::Hacker.adjective, Faker::Hacker.noun, Faker::Hacker.verb, Faker::Hacker.ingverb].sample(rand(2) + rand(3)).join('_')
     )
   end
@@ -77,17 +78,28 @@ mission_count.times do
   end
 end
 
-ToolsUsers.create(
-  tool_id: rand(tool_count) + 1,
-  user_id: rand(user_count) + 1
-)
+User.pluck(:id).each do |user_id|
+  ToolsUsers.create(
+    tool_id: rand(tool_count) + 1,
+    user_id: user_id
+  )
 
-ReposTools.create(
-  tool_id: rand(tool_count) + 1,
-  repo_id: rand(repo_count) + 1
-)
+  ToolsUsers.create(
+    tool_id: rand(tool_count) + 1,
+    user_id: user_id
+  )
+end
 
-ReposUsers.create(
-  repo_id: rand(repo_count) + 1,
-  user_id: rand(user_count) + 1
-)
+Repo.pluck(:id).each do |repo_id|
+  ReposTools.create(
+    tool_id: rand(tool_count) + 1,
+    repo_id: repo_id
+  )
+end
+
+Repo.pluck(:id).each do |repo_id|
+  ReposUsers.create(
+    repo_id: repo_id,
+    user_id: rand(user_count) + 1
+  )
+end

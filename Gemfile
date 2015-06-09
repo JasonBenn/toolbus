@@ -6,7 +6,7 @@ gem 'rails', '4.2.1'
 gem 'rails-api'
 
 gem 'jsonapi-resources'
-gem 'mysql2'
+gem 'pg'
 gem 'faker'
 gem 'jbuilder'
 gem 'puma'

@@ -13,77 +13,80 @@
 
 ActiveRecord::Schema.define(version: 20150608060009) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "completions", force: :cascade do |t|
-    t.integer  "mission_id", limit: 4
-    t.integer  "repo_id",    limit: 4
-    t.string   "commit",     limit: 255
-    t.string   "filename",   limit: 255
-    t.integer  "line_start", limit: 4
-    t.integer  "line_end",   limit: 4
-    t.string   "gist_url",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "mission_id"
+    t.integer  "repo_id"
+    t.string   "commit"
+    t.string   "filename"
+    t.integer  "line_start"
+    t.integer  "line_end"
+    t.string   "gist_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "completions", ["mission_id"], name: "index_completions_on_mission_id", using: :btree
   add_index "completions", ["repo_id"], name: "index_completions_on_repo_id", using: :btree
 
   create_table "missions", force: :cascade do |t|
-    t.text     "name",              limit: 65535
-    t.text     "summary",           limit: 65535
-    t.text     "found_in",          limit: 65535
-    t.text     "documentation_url", limit: 65535
-    t.string   "version_added",     limit: 255
-    t.string   "version_removed",   limit: 255
-    t.integer  "version",           limit: 4
-    t.integer  "user_id",           limit: 4
-    t.integer  "tool_id",           limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.text     "name"
+    t.text     "summary"
+    t.text     "found_in"
+    t.text     "documentation_url"
+    t.string   "version_added"
+    t.string   "version_removed"
+    t.integer  "version"
+    t.integer  "user_id"
+    t.integer  "tool_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "missions", ["tool_id"], name: "index_missions_on_tool_id", using: :btree
   add_index "missions", ["user_id"], name: "index_missions_on_user_id", using: :btree
 
   create_table "repos", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "repos", ["user_id"], name: "index_repos_on_user_id", using: :btree
 
   create_table "repos_tools", force: :cascade do |t|
-    t.integer "repo_id", limit: 4
-    t.integer "tool_id", limit: 4
+    t.integer "repo_id"
+    t.integer "tool_id"
   end
 
   create_table "repos_users", force: :cascade do |t|
-    t.integer "repo_id", limit: 4
-    t.integer "user_id", limit: 4
+    t.integer "repo_id"
+    t.integer "user_id"
   end
 
   create_table "tools", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "primary_color",   limit: 255
-    t.string   "secondary_color", limit: 255
-    t.text     "description",     limit: 65535
-    t.text     "url",             limit: 65535
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "name"
+    t.string   "primary_color"
+    t.string   "secondary_color"
+    t.text     "description"
+    t.text     "url"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "tools_users", force: :cascade do |t|
-    t.integer "tool_id", limit: 4
-    t.integer "user_id", limit: 4
+    t.integer "tool_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",   limit: 255
-    t.text     "image_url",  limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "username"
+    t.text     "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "completions", "missions"
