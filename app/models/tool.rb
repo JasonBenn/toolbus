@@ -4,7 +4,7 @@ class Tool < ActiveRecord::Base
 
   def to_builder
     Jbuilder.new do |tool|
-      tool.(self, :name, :primary_color, :secondary_color, :description, :url)
+      tool.(self, :name, :primary_color, :secondary_color, :description, :url, :mission_ids)
     end
   end
 end

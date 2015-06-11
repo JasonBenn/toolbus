@@ -5,6 +5,5 @@ class ToolsController < ApplicationController
 
   def show
     @tool = Tool.find(params[:id])
-    @missions = @tool.missions
   end
 end
