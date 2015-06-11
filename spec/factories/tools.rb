@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :tool do
-    name "MyString"
-    primary_color "MyString"
-    second_color "MyString"
-    description "MyString"
-    url "MyString"
+    id 1
+    name "Rails"
+    primary_color "red"
+    secondary_color "white"
+    description "Omakase"
+    url "rails.com"
   end
 end
