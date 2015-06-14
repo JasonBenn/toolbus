@@ -1,3 +1,2 @@
-class ApplicationController < ActionController::API
-  include ActionController::ImplicitRender
+class ApplicationController < JSONAPI::ResourceController
 end

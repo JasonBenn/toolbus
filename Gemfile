@@ -8,13 +8,15 @@ gem 'rails-api'
 gem 'jsonapi-resources'
 gem 'pg'
 gem 'faker'
-gem 'jbuilder'
 gem 'puma'
 
 group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+end
+
+group :test, :development do
   gem 'pry-rails'
 end
 
