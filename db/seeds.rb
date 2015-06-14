@@ -34,7 +34,7 @@ secondary_colors = {
 end
 
 Tool.pluck(:id).each do |tool_id|
-  rand(35..150).times do
+  rand(15..60).times do
     Mission.create(
       name: [Faker::Hacker.adjective, Faker::Hacker.noun, Faker::Hacker.verb, Faker::Hacker.ingverb].sample(rand(3) + 2).join(' ').capitalize,
       summary: Array.new(rand(3) + 1, Faker::Hacker.say_something_smart).join(' '),
@@ -47,19 +47,18 @@ Tool.pluck(:id).each do |tool_id|
   end
 end
 
-User.pluck(:id).each do |user_id|
-  rand(1..5).times do
-    Repo.create(
-      user_id: user_id,
-      name: [Faker::Hacker.adjective, Faker::Hacker.noun, Faker::Hacker.verb, Faker::Hacker.ingverb].sample(rand(2) + rand(3)).join('_')
-    )
-  end
-end
-
 mission_count = Mission.count
 tool_count = Tool.count
 user_count = User.count
 repo_count = Repo.count
+
+user_count.times do
+  rand(1..5).times do
+    Repo.create(
+      name: [Faker::Hacker.adjective, Faker::Hacker.noun, Faker::Hacker.verb, Faker::Hacker.ingverb].sample(rand(2) + rand(3)).join('_')
+    )
+  end
+end
 
 mission_count.times do
   mission_id = rand(mission_count) + 1
@@ -80,26 +79,12 @@ mission_count.times do
   end
 end
 
-User.pluck(:id).each do |user_id|
-  ToolsUsers.create(
-    tool_id: rand(tool_count) + 1,
-    user_id: user_id
-  )
-
-  ToolsUsers.create(
-    tool_id: rand(tool_count) + 1,
-    user_id: user_id
-  )
-end
-
 Repo.pluck(:id).each do |repo_id|
   ReposTools.create(
-    tool_id: rand(tool_count) + 1,
-    repo_id: repo_id
+    repo_id: repo_id,
+    tool_id: rand(tool_count) + 1
   )
-end
 
-Repo.pluck(:id).each do |repo_id|
   ReposUsers.create(
     repo_id: repo_id,
     user_id: rand(user_count) + 1

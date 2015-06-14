@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Tool, type: :model do
   it { should have_and_belong_to_many(:repos) }
-  it { should have_and_belong_to_many(:users) }
   it { should have_many(:missions) }
 
   it "should be able to calculate the users that have completed things with that tool" do
