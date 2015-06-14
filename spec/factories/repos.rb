@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :repo do
-    name "MyString"
-    user nil
+    name "toolbus-lite"
   end
 end
