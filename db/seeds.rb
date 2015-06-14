@@ -63,6 +63,7 @@ repo_count = Repo.count
 
 mission_count.times do
   mission_id = rand(mission_count) + 1
+  user_id = rand(user_count) + 1
   line_start = rand(100)
   
   [0, 0, 0, 1, 3, 5, 2].sample.times do 
@@ -73,7 +74,8 @@ mission_count.times do
       line_start: line_start,
       line_end: line_start + rand(5),
       repo_id: rand(repo_count) + 1,
-      mission_id: mission_id
+      mission_id: mission_id,
+      user_id: user_id
     )
   end
 end

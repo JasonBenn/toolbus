@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150608060009) do
   enable_extension "plpgsql"
 
   create_table "completions", force: :cascade do |t|
+    t.integer  "user_id"
     t.integer  "mission_id"
     t.integer  "repo_id"
     t.string   "commit"
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150608060009) do
 
   add_index "completions", ["mission_id"], name: "index_completions_on_mission_id", using: :btree
   add_index "completions", ["repo_id"], name: "index_completions_on_repo_id", using: :btree
+  add_index "completions", ["user_id"], name: "index_completions_on_user_id", using: :btree
 
   create_table "missions", force: :cascade do |t|
     t.text     "name"
@@ -39,14 +41,12 @@ ActiveRecord::Schema.define(version: 20150608060009) do
     t.string   "version_added"
     t.string   "version_removed"
     t.integer  "version"
-    t.integer  "user_id"
     t.integer  "tool_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
   add_index "missions", ["tool_id"], name: "index_missions_on_tool_id", using: :btree
-  add_index "missions", ["user_id"], name: "index_missions_on_user_id", using: :btree
 
   create_table "repos", force: :cascade do |t|
     t.string   "name"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20150608060009) do
 
   add_foreign_key "completions", "missions"
   add_foreign_key "completions", "repos"
+  add_foreign_key "completions", "users"
   add_foreign_key "missions", "tools"
-  add_foreign_key "missions", "users"
   add_foreign_key "repos", "users"
 end

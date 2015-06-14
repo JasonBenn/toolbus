@@ -14,6 +14,7 @@ gem 'puma'
 group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'pry-rails'
 end
 

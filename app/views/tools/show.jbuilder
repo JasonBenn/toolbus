@@ -1,1 +1,1 @@
-json.data @tool.to_builder.attributes!
+json.tools @tool.to_builder.attributes!

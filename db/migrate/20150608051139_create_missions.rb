@@ -8,7 +8,6 @@ class CreateMissions < ActiveRecord::Migration
       t.string :version_added
       t.string :version_removed
       t.integer :version, options: { default: 1 }
-      t.references :user, index: true, foreign_key: true
       t.references :tool, index: true, foreign_key: true
 
       t.timestamps null: false
