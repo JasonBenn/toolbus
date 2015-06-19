@@ -13,6 +13,5 @@
 /tmp
 erd.pdf
 todo.txt
-notes.md
 # Ignore application configuration
 /config/application.yml

@@ -8,7 +8,7 @@ gem 'rails-api'
 gem 'jsonapi-resources'
 gem 'pg'
 gem 'faker'
-gem 'puma'
+gem 'thin'
 gem 'pry-rails'
 gem 'figaro'
 
