@@ -6,11 +6,11 @@ gem 'rails', '4.2.1'
 gem 'rails-api'
 
 gem 'jsonapi-resources'
-gem 'pg'
 gem 'faker'
+gem 'mysql2'
 gem 'thin'
-gem 'pry-rails'
 gem 'figaro'
+gem 'pry-rails'
 
 group :test do
   gem 'factory_girl_rails'
