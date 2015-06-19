@@ -9,6 +9,8 @@ gem 'jsonapi-resources'
 gem 'pg'
 gem 'faker'
 gem 'puma'
+gem 'pry-rails'
+gem 'figaro'
 
 group :test do
   gem 'factory_girl_rails'
@@ -16,19 +18,11 @@ group :test do
   gem 'shoulda-matchers'
 end
 
-group :test, :development do
-  gem 'pry-rails'
-end
-
 group :development do
   gem 'spring'
   gem 'rails-erd'
   gem 'better_errors'
   gem 'binding_of_caller'
-end
-
-group :production do
-  gem 'rails_12factor'
 end
 
 # To use ActiveModel has_secure_password

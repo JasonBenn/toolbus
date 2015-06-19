@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   jsonapi_resources :missions
   jsonapi_resources :completions
   jsonapi_resources :repos
-  jsonapi_resources :users
+  jsonapi_resources :users  
+
+  post 'deploy' => 'utils#deploy'
 end
