@@ -13,8 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password:
+  username: jasoncbenn
   socket: /tmp/mysql.sock
 
 development:
@@ -51,4 +50,6 @@ production:
   <<: *default
   database: toolbus_api_production
   username: jasoncbenn
+  host:     toolbus.cnbvj1xmu3yx.us-west-2.rds.amazonaws.com
+  port:     3306
   password: <%= ENV['TOOLBUS_API_DATABASE_PASSWORD'] %>
